@@ -9,8 +9,6 @@ import fetchImages from "./services/api";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 
-
-
 const App = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +32,6 @@ const App = () => {
         setTotalPages(response.total_pages);
       } catch (error) {
         setIsError(true);
-        console.error("Error fetching images:", error);
       } finally {
         setIsLoading(false);
       }
