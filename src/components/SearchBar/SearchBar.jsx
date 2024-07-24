@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import styles from "./SearchBar.module.css";
 
 const SearchBar = ({ setQuery }) => {
@@ -6,19 +7,27 @@ const SearchBar = ({ setQuery }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    if (input.trim() === "") {
+      toast.error("The search field cannot be empty", {
+        duration: 2000,
+        position: "top-right",
+      });
+      return;
+    }
     setQuery(input);
   };
+
   return (
     <header className={styles.searchBar}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
-          name="search" // додано ім'я для елемента форми
+          name="search"
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
           value={input}
-          onChange={(e) => setInput(e.target.value)} // додано обробник події
+          onChange={(e) => setInput(e.target.value)}
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
@@ -28,4 +37,5 @@ const SearchBar = ({ setQuery }) => {
     </header>
   );
 };
+
 export default SearchBar;
